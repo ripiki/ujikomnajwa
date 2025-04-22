@@ -1,0 +1,108 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f9ff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.kalkulator {
+  background-color: #cce5ff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #ccc;
+  width: 300px;
+  text-align: center;
+}
+
+.kalkulator h2 {
+  margin-bottom: 20px;
+  color: #000;
+}
+
+input[type="text"] {
+  width: 90%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.tombol {
+  margin: 10px 0;
+}
+
+button {
+  padding: 10px 15px;
+  margin: 5px;
+  border: none;
+  background-color: #b0d4f1;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #90c4ec;
+}
+
+.hasil {
+  margin-top: 15px;
+  background-color: #eefafa;
+  padding: 10px;
+  border-radius: 10px;
+  min-height: 40px;
+}
+
+.riwayat {
+  margin-top: 20px;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  width: 285px;
+  box-shadow: 0 0 5px #ccc;
+  text-align: left;
+}
+
+.riwayat h3 {
+  margin-bottom: 10px;
+}
+
+.riwayat ul {
+  list-style: none;
+  padding-left: 0;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.riwayat li {
+  padding: 4px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+#hapusHistory {
+  margin-top: 10px;
+  background-color: #ffaaaa;
+  color: #000;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  transition: 0.3s;
+  width: 100%;
+}
+
+#hapusHistory:hover {
+  background-color: #ff8888;
+}
+
+footer {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #444;
+}

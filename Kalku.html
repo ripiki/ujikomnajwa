@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mini Kalkulator</title>
+  <link rel="stylesheet" href="Kalku.css" />
+</head>
+<body>
+  <div class="kalkulator">
+    <h2>Mini Kalkulator</h2>
+    <input type="text" id="angka1" placeholder="Masukkan Angka Pertama" />
+    <input type="text" id="angka2" placeholder="Masukkan Angka Kedua" />
+
+    <div class="tombol">
+      <button onclick="hitung('+')">+</button>
+      <button onclick="hitung('-')">−</button>
+      <button onclick="hitung('*')">×</button>
+      <button onclick="hitung('/')">÷</button>
+      <button onclick="hitung('%')">%</button>
+      <button onclick="clearInput()">CE</button>
+    </div>
+
+    <div class="hasil">
+      <h3>Hasil :</h3>
+      <p id="output"></p>
+    </div>
+
+    <div class="riwayat">
+      <h3>Riwayat Perhitungan :</h3>
+      <ul id="historyList"></ul>
+      <button id="hapusHistory" onclick="hapusHistory()">🗑️ Hapus Riwayat</button>
+    </div>
+  </div>
+
+  <script>
+    const angka1 = document.getElementById("angka1");
+    const angka2 = document.getElementById("angka2");
+    const output = document.getElementById("output");
+    const historyList = document.getElementById("historyList");
+
+    // Load history saat halaman dibuka
+    // window.onload = function () {
+    //   const history = JSON.parse(localStorage.getItem("kalkulatorHistory")) || [];
+    //   history.forEach(item => tambahItemKeList(item));
+    // };
+
+    function hitung(operator) {
+      const a = angka1.value.trim();
+      const b = angka2.value.trim();
+
+      if (!a || !b) {
+        output.textContent = "⚠️ Kolom tidak boleh kosong!";
+        output.style.color = "orange";
+        return;
+      }
+
+      if (isNaN(a) || isNaN(b)) {
+        output.textContent = "❌ Masukkan hanya angka yang valid!";
+        output.style.color = "red";
+        return;
+      }
+
+      const numA = parseFloat(a);
+      const numB = parseFloat(b);
+      let hasil;
+      let operasi = "";
+
+      switch (operator) {
+        case '+': hasil = numA + numB; operasi = "+"; break;
+        case '-': hasil = numA - numB; operasi = "−"; break;
+        case '*': hasil = numA * numB; operasi = "×"; break;
+        case '/':
+          if (numB === 0) {
+            output.textContent = "❌ Tidak bisa dibagi dengan 0";
+            output.style.color = "red";
+            return;
+          }
+          hasil = numA / numB;
+          operasi = "÷";
+          break;
+        case '%': hasil = numA % numB; operasi = "%"; break;
+        default: hasil = "Operator tidak dikenal";
+      }
+
+      output.textContent = hasil;
+      output.style.color = "black";
+
+      const teksRiwayat = `${numA} ${operasi} ${numB} = ${hasil}`;
+      tambahItemKeList(teksRiwayat);
+      simpanKeLocalStorage(teksRiwayat);
+    }
+
+    function clearInput() {
+      angka1.value = "";
+      angka2.value = "";
+      output.textContent = "";
+    }
+
+    function tambahItemKeList(teks) {
+      const item = document.createElement("li");
+      item.textContent = teks;
+      historyList.appendChild(item);
+    }
+
+    function simpanKeLocalStorage(item) {
+      const history = JSON.parse(localStorage.getItem("kalkulatorHistory")) || [];
+      history.push(item);
+      localStorage.setItem("kalkulatorHistory", JSON.stringify(history));
+    }
+
+    function hapusHistory() {
+      localStorage.removeItem("kalkulatorHistory");
+      historyList.innerHTML = "";
+    }
+
+    // Keyboard support
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        hitung('+');
+      } else if (["+", "-", "*", "/", "%"].includes(event.key)) {
+        hitung(event.key);
+      }
+    });
+  </script>
+</body>
+</html>
